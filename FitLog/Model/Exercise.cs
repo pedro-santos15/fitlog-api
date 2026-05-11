@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitLog.Model
 {
-    [Table("Exercises")]
+    [Table("exercises")]
     public class Exercise
     {
         [Key]
@@ -26,5 +26,9 @@ namespace FitLog.Model
         public string Description { get; set; } = string.Empty;
         
         public decimal Weight { get; set; }
+
+        public long WorkoutId { get; set; }
+
+        public Workout Workout { get; set; }
     }
 }
