@@ -1,5 +1,4 @@
-﻿using FitLog.Model;
-
+﻿
 namespace FitLog.Repositories
 {
     public interface IRepositoryBase<T>
@@ -11,8 +10,8 @@ namespace FitLog.Repositories
 
         Task CreateAsync(T entity);
 
-        Task SaveChangesAsync();
+        Task DeleteAsync(long id);
 
-        Task DeleteAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

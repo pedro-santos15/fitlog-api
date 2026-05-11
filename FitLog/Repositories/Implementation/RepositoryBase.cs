@@ -14,7 +14,7 @@ namespace FitLog.Repositories.Implementation
             _context = context;
         }
 
-        public async Task<T?> FindByIdAsync(long id)
+        public async Task<T> FindByIdAsync(long id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
@@ -27,17 +27,22 @@ namespace FitLog.Repositories.Implementation
         public async Task CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(T entity)
+        public async Task DeleteAsync(long id)
         {
-            _context.Set<T>().Remove(entity);
-
-            await Task.CompletedTask;
+            var entityFound = await FindByIdAsync(id);
+            if(entityFound != null)
+            {
+                _context.Set<T>().Remove(entityFound);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public async Task SaveChangesAsync()
+        public async Task UpdateAsync(T entity)
         {
+            _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
         }
     }
