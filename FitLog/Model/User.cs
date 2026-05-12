@@ -6,6 +6,17 @@ namespace FitLog.Model
     [Table("users")]
     public class User
     {
+
+        public User()
+        {
+        }
+        public User(string name, int age, string email)
+        {
+            Name = name;
+            Age = age;
+            Email = email;
+        }
+
         [Key]
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
