@@ -18,8 +18,6 @@ builder.Services.AddControllers()
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 
-builder.Services.AddControllers();
-
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();

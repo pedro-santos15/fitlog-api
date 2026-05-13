@@ -17,7 +17,7 @@ namespace FitLog.Controllers
             _userService = userService;
         }
 
-        [HttpGet("[id]")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(long id)
         {
             try
@@ -42,8 +42,8 @@ namespace FitLog.Controllers
         {
             try
             {
-                var userCreated = await _userService.CreateUserAsync(user);
-                return CreatedAtAction(userCreated.Name, userCreated);
+                var createdUser = await _userService.CreateUserAsync(user);
+                return CreatedAtAction(nameof(GetById), new { id = createdUser.Id }, null);
             }
             catch (InvalidOperationException e)
             {
@@ -51,7 +51,7 @@ namespace FitLog.Controllers
             }
         }
 
-        [HttpPut("[id]")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(long id, [FromBody] UserDto user)
         {
             try
@@ -65,7 +65,7 @@ namespace FitLog.Controllers
             }
         }
 
-        [HttpDelete("[id]")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
             try
